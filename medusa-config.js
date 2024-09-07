@@ -37,6 +37,10 @@ const DB_PORT = process.env.DB_PORT
 const DB_DATABASE = process.env.DB_DATABASE
 const DB_HOST = process.env.DB_HOST
 
+const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME
+const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY
+const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET
+
 const DATABASE_URL =
   `postgres://${DB_USERNAME}:${DB_PASSWORD}` +
   `@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`;
@@ -74,15 +78,15 @@ const plugins = [
   //     useCdn: false, // `false` if you want to ensure fresh data
   //   },
   // },
-  // {
-  //   resolve: `medusa-file-cloudinary`,
-  //   options: {
-  //     cloud_name: "demw3uawq",
-  //     api_key: "556768293818677",
-  //     api_secret: "kLgV0wnXFEjcwUy0kPNPqw6XqA8",
-  //     secure: true,
-  //   },
-  // },
+  {
+    resolve: `medusa-file-cloudinary`,
+    options: {
+      cloud_name: CLOUDINARY_CLOUD_NAME,
+      api_key: CLOUDINARY_API_KEY,
+      api_secret: CLOUDINARY_API_SECRET,
+      secure: true,
+    },
+  },
 ];
 
 const modules = {
