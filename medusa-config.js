@@ -31,6 +31,11 @@ const STORE_CORS =
 
 // const DATABASE_URL =
 //   process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
+const DB_USERNAME = process.env.DB_USERNAME
+const DB_PASSWORD = process.env.DB_PASSWORD
+const DB_PORT = process.env.DB_PORT
+const DB_DATABASE = process.env.DB_DATABASE
+const DB_HOST = process.env.DB_HOST
 
 const DATABASE_URL =
   `postgres://${DB_USERNAME}:${DB_PASSWORD}` +
@@ -48,15 +53,6 @@ const plugins = [
     },
   },
   {
-    resolve: `medusa-plugin-strapi`,
-    options: {
-      strapi_medusa_user: "vickywane",
-      strapi_medusa_password: "Iamchuwudumebi01!",
-      strapi_url: "127.0.0.1",
-      strapi_port: "1337",
-    },
-  },
-  {
     resolve: "@medusajs/admin",
     /** @type {import('@medusajs/admin').PluginOptions} */
     options: {
@@ -66,27 +62,27 @@ const plugins = [
       },
     },
   },
-  {
-    resolve: `medusa-plugin-sanity`,
-    options: {
-      projectId: process.env.SANITY_PROJECT_ID,
-      dataset: process.env.SANITY_DATASET,
-      token: process.env.SANITY_TOKEN,
-      // apiVersion: '2021-10-21', // old API version for SanityCMS
-      apiVersion: "2023-01-01",
+  // {
+  //   resolve: `medusa-plugin-sanity`,
+  //   options: {
+  //     projectId: process.env.SANITY_PROJECT_ID,
+  //     dataset: process.env.SANITY_DATASET,
+  //     token: process.env.SANITY_TOKEN,
+  //     // apiVersion: '2021-10-21', // old API version for SanityCMS
+  //     apiVersion: "2023-01-01",
 
-      useCdn: false, // `false` if you want to ensure fresh data
-    },
-  },
-  {
-    resolve: `medusa-file-cloudinary`,
-    options: {
-      cloud_name: "demw3uawq",
-      api_key: "556768293818677",
-      api_secret: "kLgV0wnXFEjcwUy0kPNPqw6XqA8",
-      secure: true,
-    },
-  },
+  //     useCdn: false, // `false` if you want to ensure fresh data
+  //   },
+  // },
+  // {
+  //   resolve: `medusa-file-cloudinary`,
+  //   options: {
+  //     cloud_name: "demw3uawq",
+  //     api_key: "556768293818677",
+  //     api_secret: "kLgV0wnXFEjcwUy0kPNPqw6XqA8",
+  //     secure: true,
+  //   },
+  // },
 ];
 
 const modules = {
