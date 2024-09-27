@@ -31,6 +31,7 @@ const STORE_CORS =
 
 // const DATABASE_URL =
 //   process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
+  
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_PORT = process.env.DB_PORT;
@@ -40,6 +41,7 @@ const DB_HOST = process.env.DB_HOST;
 const CLOUDINARY_CLOUD_NAME = process.env.CLOUDINARY_CLOUD_NAME;
 const CLOUDINARY_API_KEY = process.env.CLOUDINARY_API_KEY;
 const CLOUDINARY_API_SECRET = process.env.CLOUDINARY_API_SECRET;
+const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
 
 const ALGOLIA_API_ID = process.env.ALGOLIA_API_ID;
 const ALGOLIA_API_KEY = process.env.ALGOLIA_API_KEY;
@@ -54,11 +56,19 @@ const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
   {
+    resolve: `medusa-payment-paystack`,
+    /** @type {import("medusa-payment-paystack").PluginOptions} */
+    options: {
+      secret_key: PAYSTACK_SECRET_KEY,
+      debug: true
+    },
+  },
+  {
     resolve: `medusa-plugin-algolia`,
     options: {
       applicationId: ALGOLIA_API_ID,
       adminApiKey: ALGOLIA_API_KEY,
-      settings: {
+      settings: { 
         products: {
           indexSettings: {
             searchableAttributes: ["title", "description"],
@@ -96,18 +106,6 @@ const plugins = [
       },
     },
   },
-  // {
-  //   resolve: `medusa-plugin-sanity`,
-  //   options: {
-  //     projectId: process.env.SANITY_PROJECT_ID,
-  //     dataset: process.env.SANITY_DATASET,
-  //     token: process.env.SANITY_TOKEN,
-  //     // apiVersion: '2021-10-21', // old API version for SanityCMS
-  //     apiVersion: "2023-01-01",
-
-  //     useCdn: false, // `false` if you want to ensure fresh data
-  //   },
-  // },
   {
     resolve: `medusa-file-cloudinary`,
     options: {
