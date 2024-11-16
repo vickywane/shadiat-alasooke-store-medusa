@@ -31,7 +31,7 @@ const STORE_CORS =
 
 // const DATABASE_URL =
 //   process.env.DATABASE_URL || "postgres://localhost/medusa-starter-default";
-  
+
 const DB_USERNAME = process.env.DB_USERNAME;
 const DB_PASSWORD = process.env.DB_PASSWORD;
 const DB_PORT = process.env.DB_PORT;
@@ -64,7 +64,42 @@ const plugins = [
     /** @type {import("medusa-payment-paystack").PluginOptions} */
     options: {
       secret_key: PAYSTACK_SECRET_KEY,
-      debug: true
+      debug: true,
+    },
+  },
+  {
+    resolve: "medusa-plugin-smtp",
+    options: {
+      fromEmail: "noreply@medusajs.com",
+      // this object is input directly into nodemailer.createtransport(), so anything that works there should work here
+      // see: https://nodemailer.com/smtp/#1-single-connection and https://nodemailer.com/transports/
+      transport: {
+        sendmail: true,
+        path: "/usr/sbin/sendmail",
+        newline: "unix",
+      },
+      // an example for an office365 smtp transport:
+      // {
+      //     host: "smtp.office365.com",
+      //     port: 587,
+      //     secureConnection: false,
+      //     auth: {
+      //         user: process.env.EMAIL_SENDER_ADDRESS,
+      //         pass: process.env.EMAIL_SENDER_PASS,
+      //     },
+      //     tls: {
+      //         ciphers: "SSLv3",
+      //     },
+      //     requireTLS: true,
+      // },
+      // this is the path where your email templates are stored
+      emailTemplatePath: "data/emailTemplates",
+      // this maps the folder/template name to a medusajs event to use the right template
+      // only the events that are registered here are subscribed to
+      templateMap: {
+        // "eventname": "templatename",
+        "order.placed": "orderplaced",
+      },
     },
   },
   {
@@ -72,7 +107,7 @@ const plugins = [
     options: {
       applicationId: ALGOLIA_API_ID,
       adminApiKey: ALGOLIA_API_KEY,
-      settings: { 
+      settings: {
         products: {
           indexSettings: {
             searchableAttributes: ["title", "description"],
