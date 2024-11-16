@@ -1,0 +1,177 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:039612843805:task-definition/shadiat-medusa-task-definition:1",
+    "containerDefinitions": [
+        {
+            "name": "medusa-shadiat-store-repo",
+            "image": "https://039612843805.dkr.ecr.us-east-1.amazonaws.com/medusa-shadiat-store-repo:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "medusa-shadiat-store-repo-9000-tcp",
+                    "containerPort": 9000,
+                    "hostPort": 9000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                },
+                {
+                    "name": "medusa-shadiat-store-repo-7001-tcp",
+                    "containerPort": 7001,
+                    "hostPort": 7001,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "SANITY_PROJECT_ID",
+                    "value": "tavokvmy"
+                },
+                {
+                    "name": "MEDUSA_ADMIN_ONBOARDING_NEXTJS_DIRECTORY",
+                    "value": "asooke-medusa-store-storefront"
+                },
+                {
+                    "name": "DB_PORT",
+                    "value": "5432"
+                },
+                {
+                    "name": "CLOUDINARY_API_SECRET",
+                    "value": "kLgV0wnXFEjcwUy0kPNPqw6XqA8"
+                },
+                {
+                    "name": "ALGOLIA_API_KEY",
+                    "value": "00be0e5a1d882d378ff14f859d565b48"
+                },
+                {
+                    "name": "DB_HOST",
+                    "value": "shadiat-alasooke-medusa.c9oe2eyqw1lz.eu-north-1.rds.amazonaws.com"
+                },
+                {
+                    "name": "SANITY_DATASET",
+                    "value": "production"
+                },
+                {
+                    "name": "PAYSTACK_SECRET_KEY",
+                    "value": "sk_test_c62a7f16acff11879ad371e06714e7a4cb9d666a"
+                },
+                {
+                    "name": "DATABASE_TYPE",
+                    "value": "postgres"
+                },
+                {
+                    "name": "DATABASE_URL",
+                    "value": "postgres://victory@localhost/medusa-lahd"
+                },
+                {
+                    "name": "STORE_CORS",
+                    "value": "http://localhost:8000,http://localhost:7001,http://localhost:3000"
+                },
+                {
+                    "name": "DB_USERNAME",
+                    "value": "postgres"
+                },
+                {
+                    "name": "SANITY_TOKEN",
+                    "value": "skPjYpP9Ro2PbAV3qYeb8JXgyYgn8V0gmuw0cklsLQ84V6PVbxtynbwY99u3bPYoWV4aOh8Cz4PqvZRa16PJvXW79eu4VxiytwsMQF5HhqJhcSsxnZNR8cJ1r43gSH6UOZcyPcW9CFiB2z0Tth4eVByyIgbmXdxj1sp2dPv46CbTUwMBRnRu"
+                },
+                {
+                    "name": "MEDUSA_ADMIN_ONBOARDING_TYPE",
+                    "value": "nextjs"
+                },
+                {
+                    "name": "CLOUDINARY_CLOUD_NAME",
+                    "value": "demw3uawq"
+                },
+                {
+                    "name": "CLOUDINARY_API_KEY",
+                    "value": "556768293818677"
+                },
+                {
+                    "name": "DB_DATABASE",
+                    "value": "shadiat-alasooke-store"
+                },
+                {
+                    "name": "ALGOLIA_API_ID",
+                    "value": "77TNAWDNZG"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "value": "LhWPQDnkxF6RC1TOMmJX"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/",
+                    "mode": "non-blocking",
+                    "awslogs-create-group": "true",
+                    "max-buffer-size": "25m",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        }
+    ],
+    "family": "shadiat-medusa-task-definition",
+    "taskRoleArn": "arn:aws:iam::039612843805:role/codecatalyst-ecs-task-execution-role",
+    "executionRoleArn": "arn:aws:iam::039612843805:role/codecatalyst-ecs-task-execution-role",
+    "networkMode": "awsvpc",
+    "revision": 1,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "2048",
+    "memory": "6144",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2024-11-16T13:14:52.445Z",
+    "registeredBy": "arn:aws:iam::039612843805:user/vicky_wane",
+    "tags": [
+        {
+            "key": "used_by",
+            "value": "shadiat-alasooke-project"
+        }
+    ]
+}
