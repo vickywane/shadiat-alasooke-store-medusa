@@ -1,0 +1,55 @@
+schemaVersion: 2.0.0
+metadata:
+  name: Shadiat Medusa Store
+  version: 1.0.1
+  displayName: Shadiat Medusa Store
+  description: Medusa Engine For Shadiat Store.
+  tags:
+    - aws
+    - a12
+  projectType: aws
+components:
+  - name: aws-runtime
+    container:
+      image: public.ecr.aws/aws-mde/universal-image:3.0
+      mountSources: true
+      volumeMounts:
+        - name: docker-store
+          path: /var/lib/docker
+  - name: docker-store
+    volume:
+      size: 16Gi
+events:
+  postStart:
+    - install-aws-copilot
+    - copy-build-source
+    - build-docker
+commands:
+  # - id: install-nodejs
+  #   exec:
+  #     # Install Node.js
+  #     commandLine: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | sudo bash
+  #       nvm install 22 && node -v 
+  #     workingDir: $PROJECT_SOURCE
+  #     component: aws-runtime
+
+  - id: install-aws-copilot
+    exec:
+      commandLine: export AWS_REGION=us-west-2 && wget -q
+        https://ecs-cli-v2-release.s3.amazonaws.com/copilot-linux-v1.26.0 && mv
+        ./copilot-linux-v1.26.0 ./copilot-linux && chmod x ./copilot-linux
+      workingDir: $PROJECT_SOURCE
+      component: aws-runtime
+
+  - id: copy-build-source
+    exec:
+      commandLine: cp .env-template .env && npm install && npm run build
+      workingDir: $PROJECT_SOURCE
+      component: aws-runtime
+
+  - id: build-docker
+    exec:
+      commandLine: docker compose build
+      workingDir: $PROJECT_SOURCE
+      component: aws-runtime
+ 

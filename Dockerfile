@@ -17,7 +17,7 @@ COPY . .
 EXPOSE 9000
 
 # Start the Medusa server
-# CMD ["yarn", "start"]
+CMD ["yarn", "start"]
 
 # Start the server using the medusa production build
 # CMD ["node", "dist/main.js"]

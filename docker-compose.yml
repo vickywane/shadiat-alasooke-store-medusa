@@ -1,0 +1,11 @@
+version: "3.7"
+services:
+  medusa-engine:
+    build: .
+    environment:
+      - PORT
+      - NODE_ENV
+    ports:
+      - 9000:${PORT}
+      - 7001:${PORT}
+ 
