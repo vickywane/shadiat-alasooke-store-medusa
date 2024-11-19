@@ -5,6 +5,7 @@ phases:
     commands:
        - npm install
        - npm run build
+      #  npm run test
       #  - npm run start
       # - npm run start:prod
 
