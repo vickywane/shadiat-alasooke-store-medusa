@@ -9,6 +9,8 @@ phases:
       #  - npm run start
       # - npm run start:prod
 
-# artifacts:
-#   files:
-#     - '**/*'
+artifacts:
+  files:
+    - '**/*'
+    - "*"
+    - "dist/*"
